@@ -5,4 +5,6 @@ The code generates a crude PWM pulse based on turning on and off the digital out
 It Also has a server which handles the values in and out to a very simple web page.
 Think of it as one more example using the techincs shown on the book "Getting Started with the Internet of Things by Cuno Pfister"
 
+The AnalogNetFeedBack.zip file contains all the project files for Netduino 2 plus firmware 4.3.1 in Visual Studio 2012 environment.
+
 More infos at: tipsforiot.wordpress.com
