@@ -1,0 +1,5 @@
+﻿[cp, 20131113] Simplify SocketStream to only support TCP sockets and wholly owned sockets
+
+Done
+[cp, 20140103] Move SocketStream and SocketStreamFactory to Oberon.Net.Sockets (it does not depend on NETMF)
+[cp, 20131113] Put NTP client into separate project? Oberon.Ntp? Rename Oberon.Web to Oberon.Http?

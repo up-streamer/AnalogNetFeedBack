@@ -1,0 +1,113 @@
+﻿Netduino Plus 2 Version
+=======================
+
+This Visual Studio solution contains .NET Micro Framework 4.3.1 versions of all
+samples for my book "Getting Started with the Internet of Things". See also
+
+http://www.gsiot.info/blog/
+
+
+* NETMF 4.3.1 firmware
+
+Please make sure that you have installed the NETMF 4.3.1 SDK and the Netduino
+Plus 2 SDK in versions 4.3.1! This may also require the installation of a new
+version of the TinyBooter. See here for more details:
+
+http://forums.netduino.com/index.php?/topic/10479-netduino-plus-2-firmware-v431/
+
+
+* API changes since NETMF 4.2 QFE2
+
+This version includes the changes that have become necessary for NETMF 4.2 QFE2,
+due to some changes in the framework APIs (analog inputs). For a more details, see
+
+http://www.gsiot.info/2012/06/13/gsiot-samples-for-netmf-4-2-mountaineer-boards/
+
+
+* Pachube, then Cosm, now Xively
+
+Pachube has changed its name *again* (I wonder what they are smoking...), from
+Cosm to Xively. I have changed the samples and library accordingly.
+
+
+* One solution, instead of many individual projects
+
+To make handling of the many sample projects easier, I have put all of them in a
+single Visual Studio solution, along with the support libraries. To ensure that
+all samples end up above the libraries in the solution explorer, all project
+directories start with a number, e.g. "00 HelloWorld". In this way, the samples
+appear in the same order as in the book.
+
+The StartUp project, which is started when you hit F5 ("Start Debugging" in menu
+DEBUG), is shown in bold in the solution explorer. You can change it by pointing
+with the mouse at the project that you want to start, e.g. "01 BlinkingLed", then
+selecting "Set as StartUp Project" in the menu that pops up when you click the
+right mouse button.
+
+Before deploying an application, go to the project's properties, then to the
+".NET Micro Framework" tab, and make sure that the Transport is USB, and that
+you see your device listed.
+
+
+* PC programs
+The two PC programs (LedControllerClient and TestServer) are in a separate
+companion solution. They target the full desktop .NET framework.
+
+
+* Configuration project
+
+To make it easier to work with different boards, I have put the hardware-
+dependent pin definitions into a separate project called "Configuration". All
+samples that need such definitions get them from the Configuration.Parameters
+class. You can change this class as needed, e.g. to use an externally attached
+LED, instead of the default on-board LED.
+
+Also, this is the place to set up your Xively API key and feed ID, as well as
+your Yaler domain and key. In this way, you don't need to change all samples,
+you only need to make the changes in one place.
+
+After you make a change to Configuration.Parameters, hit the F6 key to rebuild
+all dependent samples.
+
+Important: at the start of your program, you need to call
+Parameters.Setup()!
+
+
+* HttpServer properties
+
+While simplifying the configuration as described above, I replaced the
+HttpServer properties RelayDomain and RelaySecretKey by a more general
+property StreamProvider. The Configuration.Parameters.Setup method
+supplies an appropriate stream provider in the static field StreamProvider.
+As a result, a Web server sample that used to look like this:
+
+        var webServer = new HttpServer
+        {
+            RelayDomain = "...",
+			RelaySecretKey = "...",
+            RequestRouting =
+            {
+                ...
+            }
+        };
+
+now looks like this:
+
+        var webServer = new HttpServer
+        {
+            StreamProvider = Parameters.StreamProvider,
+            RequestRouting =
+            {
+                ...
+            }
+        };
+
+
+I hope that you find the samples useful - if so, please add a review on
+Amazon.com!
+
+Thanks and best regards
+
+Cuno Pfister
+
+Zürich, April 2014
